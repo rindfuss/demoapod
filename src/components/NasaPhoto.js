@@ -1,38 +1,67 @@
 import React, { useState, useEffect } from "react";
 import MorphBall from "./MorphBall";
+import NavBar from "./NavBar";
+
+const apiKey = process.env.REACT_APP_NASA_KEY;
 
 export default function NasaPhoto() {
     const [photoData, setPhotoData] = useState(null);
 
     useEffect( () => {
-        setTimeout(() => {
+        //setTimeout(() => {
             fetchPhoto();
-        }, 5000);
+        //}, 5000);
 
         async function fetchPhoto() {
-            const res = await fetch('https://api.nasa.gov/planetary/apod?api_key=FYhFE0FKLP08Ah3gebbFPYzxT2RzTDjvCh1PMe9y');
+            const res = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}`);
             const data = await res.json();
             setPhotoData(data);    
         }
     }, []);
     
-    if (!photoData) return /*<div></div>; */ (
-        <div style={{width: '100vw', height: '100vw'}}>
-            <MorphBall />
-        </div>
-    );
+    if (!photoData) {
+        const mbProps = {
+            height: '25px', 
+            width: '25px', 
+            color: 'gray',
+        };
+        
+        return (
+            <React.Fragment>
+            <NavBar />
+            <div style={{position: 'fixed', width: '100%', height: '100%'}}>
+                <MorphBall {...mbProps}/>
+            </div>
+            </React.Fragment>
+        );
+    }
 
     return (
+        <React.Fragment>
+        <NavBar />
         <div className="nasa-photo">
-            <img src={photoData.url}
-                alt={photoData.title}
-                className="photo"
-            />
+            {photoData.media_type === "image" ? (
+                <img src={photoData.url}
+                    alt={photoData.title}
+                    className="photo"
+                />) 
+            : (
+                <iframe
+                    title = "space-video"
+                    src={photoData.url}
+                    frameBorder="0"
+                    gesture="media"
+                    allow="encrypted-media"
+                    allowFullScreen
+                    className="photo"
+                />
+            )}
             <div>
                 <h1>{photoData.title}</h1>
                 <p className="date">{photoData.date}</p>
                 <p className="explanation">{photoData.explanation}</p>
             </div>
         </div>
+        </React.Fragment>
     );
 }

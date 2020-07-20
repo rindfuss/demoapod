@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route } from "react-router-dom";
 import Home from "./components/Home";
 import NasaPhoto from "./components/NasaPhoto";
-import './App.css';
+import './App.css?v=1';
 
 function App() {
   return (
