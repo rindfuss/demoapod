@@ -1,3 +1,6 @@
+<?php
+ /* php wrapper to prompt heroku to run the app in a php environment */
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
