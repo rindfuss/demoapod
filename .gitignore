@@ -9,7 +9,7 @@
 /coverage
 
 # production
-/build
+#/build   # in this case we DO want the build folder for deploying to Heroku
 
 # misc
 .DS_Store
