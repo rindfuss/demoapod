@@ -2,18 +2,18 @@ import React, { useState, useEffect } from "react";
 import MorphBall from "./MorphBall";
 import NavBar from "./NavBar";
 
-const apiKey = process.env.REACT_APP_NASA_KEY;
+const apiKey = 'DEMO_KEY'; //process.env.REACT_APP_NASA_KEY;
 
 export default function NasaPhoto() {
     const [photoData, setPhotoData] = useState(null);
 
     useEffect( () => {
-        //setTimeout(() => {
-            fetchPhoto();
-        //}, 5000);
+        fetchPhoto();
 
         async function fetchPhoto() {
-            const res = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}`);
+            const today = new Date();
+            const dateString = today.getFullYear().toString() + '-' + (today.getMonth()+1).toString().padStart(2, '0') + '-' + (today.getDate().toString().padStart(2, '0'));
+            const res = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=${dateString}`);
             const data = await res.json();
             setPhotoData(data);    
         }
