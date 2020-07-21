@@ -1,4 +1,4 @@
-# Demo App to Display NASA Astronomy Picture of the Day
+# Demo ReactJS App to Display NASA Astronomy Picture of the Day
 This is a React JS learning project based on a tutorial by developer, Kapehe at 
 [https://scotch.io/tutorials/make-a-stellar-react-nasa-app-in-10-minutes](https://scotch.io/tutorials/make-a-stellar-react-nasa-app-in-10-minutes).
 
